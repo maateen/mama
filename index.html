@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Mama by maateen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Mama</h1>
+      <h2 class="project-tagline">The aim of this project is to let you use Microsoft powered Bing Speech Recognition API to control your Linux computer. The project is developed in Python3. For note, this is a fork of project google2ubuntu.</h2>
+      <a href="https://github.com/maateen/mama" class="btn">View on GitHub</a>
+      <a href="https://github.com/maateen/mama/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/maateen/mama/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="mama" class="anchor" href="#mama" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mama</h1>
+
+<p>The aim of this project is to let you use <a href="https://www.microsoft.com/cognitive-services/en-us/speech-api">Microsoft powered Bing Speech Recognition API</a> to control your Linux computer. The project is developed in Python3. For note, this is a fork of project <a href="https://github.com/benoitfragit/google2ubuntu">google2ubuntu</a>.</p>
+
+<p>The mother project, <a href="https://github.com/benoitfragit/google2ubuntu">google2ubuntu</a>, is a tool that <strong>Franquet Benoit</strong> started 2 years ago, written in Python2. Unfortunately, he was not able to do what he wanted because of a lack of time. Perhaps, he used Google Web Speech API which isn't free anymore.</p>
+
+<p>So I am moving the project to the next level using <a href="https://www.microsoft.com/cognitive-services/en-us/speech-api">Microsoft powered Bing Speech Recognition API</a> by renaming it <strong>Mama</strong>.</p>
+
+<h3>
+<a id="why-is-it-renamed-mama" class="anchor" href="#why-is-it-renamed-mama" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Why is it renamed Mama?</h3>
+
+<p>In <strong>Bangladesh</strong>, the term <strong>Mama</strong> is similar to maternal uncle. But now-a-days, it has become a common calling name of people, known/unknown. Actually we call someone <strong>mama</strong> with love. That's the matter!</p>
+
+<p>The project consists in 2 principal Python3 scripts:</p>
+
+<ul>
+<li>mama.py</li>
+<li>mama-manager.py</li>
+</ul>
+
+<p>The first one lets you send commands to Microsoft and then execute some actions. The second one lets you manage all the commands.</p>
+
+<p><strong>Franquet Benoit</strong> has done huge efforts to make the program easy to install and easy to use. Besides, he has made the project internationalized by bringing it available in French, English, Dutch, Spanish and Italian.</p>
+
+<h1>
+<a id="special-thanks" class="anchor" href="#special-thanks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Special thanks</h1>
+
+<p>Before I begin, I want to thank some of you who help <strong>Franquet Benoit</strong> a  lot.</p>
+
+<h2>
+<a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributors</h2>
+
+<table>
+<thead>
+<tr>
+<th>Devs</th>
+<th>Translators</th>
+<th>Bug reports</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/tectas">tectas</a></td>
+<td><a href="https://github.com/tectas">tectas</a></td>
+<td><a href="https://github.com/bmeznarsic">bmeznarsic</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/mte90">mte90</a></td>
+<td><a href="https://github.com/mte90">mte90</a></td>
+<td><a href="https://github.com/hotice">Andrew from Webupd8</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Levan7">levan7</a></td>
+<td><a href="https://github.com/lincus">lincus</a></td>
+<td><a href="https://github.com/mte90">mte90</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/ladios">ladios</a></td>
+<td><a href="https://github.com/ladios">ladios</a></td>
+<td><a href="https://github.com/mads5408">mads5408</a></td>
+</tr>
+<tr>
+<td>Josh Chen</td>
+<td><a href="https://github.com/frankclaessen">Frank Claessen</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h1>
+
+<h3>
+<a id="dependancies" class="anchor" href="#dependancies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependancies</h3>
+
+<p>For the moment, dependancies are:</p>
+
+<ul>
+<li>bash</li>
+<li>python3</li>
+<li>python3-gi</li>
+<li>libnotify-dev</li>
+<li>sox</li>
+<li>xdotool</li>
+<li>libsox-fmt-mp3</li>
+<li>acpi</li>
+<li>python3-simplejson</li>
+</ul>
+
+<p>If you are installing Mama from source not from deb or from ppa, type this:</p>
+
+<pre><code>sudo apt-get install bash python3 python3-gi python3-simplejson libsox-fmt-mp3 sox libnotify-dev acpi xdotool
+</code></pre>
+
+<h2>
+<a id="first-launch" class="anchor" href="#first-launch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>First launch</h2>
+
+<h3>
+<a id="main-programs" class="anchor" href="#main-programs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Main programs</h3>
+
+<p>Once you have installed Mama, you can attribute a shortcut to those 2 Python scripts:</p>
+
+<pre><code>python3 /usr/share/Mama/mama.py
+python3 /usr/share/Mama/mama-manager.py
+</code></pre>
+
+<p>Moreover, if you search in the application's menu you will find two launchers, one for each of those programs.</p>
+
+<p>After that, you can launch <code>mama-manager.py</code> in order to manage all commands.
+<img src="http://pix.toile-libre.org/upload/original/1392223354.png" alt="Mama-manager"></p>
+
+<p>As you can see, Mama comes with several default commands. I will explain you how to manage and add commands.</p>
+
+<h3>
+<a id="basic-configs" class="anchor" href="#basic-configs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Basic configs</h3>
+
+<p>Then you can configure Mama by clicking on the <strong>Setup</strong> button, that will open a window
+<img src="http://pix.toile-libre.org/upload/original/1392400825.png" alt="setup"></p>
+
+<p>In this window you can:</p>
+
+<ol>
+<li>configure the language you want to use, by changing the language in the combobox. For the GUI the will take effect after restart.</li>
+<li>Set the recording time (seconds) between 1 and 10 seconds</li>
+<li>Set the command to pause/play the media player, (If you don't know what command to use let it emply)</li>
+<li>Activate/Deactivate and configure the hotword mode</li>
+</ol>
+
+<p>For the last two parameters, as there is a lot of media player (vlc, mplayer, banshee, ...) I think this way is the most efficient because it lets anybody writing a basic shell script that will pause or play his favorite media player. So those commands could be shell commands or could be more elaborated scripts</p>
+
+<h1>
+<a id="manage-commands" class="anchor" href="#manage-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Manage commands</h1>
+
+<h2>
+<a id="commands-storage" class="anchor" href="#commands-storage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Commands' storage</h2>
+
+<p>By default, Mama comes with several commands stored in a default xml file:</p>
+
+<pre><code>/usr/share/mama/config/&lt;your_language&gt;/default.xml
+</code></pre>
+
+<p>For the moment, there is a default file for French, English, Spanish, Deutch and Italian users, if your language is not currently supported the default voice will be English.</p>
+
+<p>At the first, launch, a module folder is created in:</p>
+
+<pre><code>~/.config/mama
+</code></pre>
+
+<p>The first time you add, modify or remove a command, your commands' configuration will be also stored in this folder in the file:</p>
+
+<pre><code>~/.config/mama/mama.xml
+</code></pre>
+
+<h2>
+<a id="commands-description" class="anchor" href="#commands-description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Commands' description</h2>
+
+<p>A command is a pair of <code>key</code> and <code>action</code>. Each <code>key</code> referes to an <code>action</code>. Many <code>key</code> can leads to the same <code>action</code>.
+To define a command, you do not need to make explicitaly all the word you will tell, I mean, if I want to create the command:</p>
+
+<pre><code>key: open my documents
+action: xdg-open ~/Documents
+</code></pre>
+
+<p>The word <code>my</code> is not usefull so, I will put:</p>
+
+<pre><code>key: open documents
+action: xdg-open ~/Documents
+</code></pre>
+
+<p>Don't care about capital letter, because the program automatically put the text in lowercase.</p>
+
+<p>I've implemented different types of command:</p>
+
+<ul>
+<li><strong>external commands</strong></li>
+<li><strong>internal commands</strong></li>
+<li><strong>modules</strong></li>
+</ul>
+
+<h3>
+<a id="external-commands" class="anchor" href="#external-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>External commands</h3>
+
+<p>External commands are basically commands that you can run in your terminal:</p>
+
+<pre><code>exo-open --launch MailReader
+</code></pre>
+
+<p>If you want to add an external command, just click on the "Add" button. Then find the newline and replace "your key" by the key you want to associate to the command and replace "your command" by the action.</p>
+
+<h3>
+<a id="internal-commands" class="anchor" href="#internal-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Internal commands</h3>
+
+<h4>
+<a id="what-are-they-" class="anchor" href="#what-are-they-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What are they ?</h4>
+
+<p>Internal commands are commands that I've implemented in Mama, for the moment there is 3 internal commands:</p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>time</td>
+<td>Tell the current time</td>
+</tr>
+<tr>
+<td>power</td>
+<td>Tell the battery state</td>
+</tr>
+<tr>
+<td>clipboard</td>
+<td>Read the text selected by the cursor</td>
+</tr>
+<tr>
+<td>dictation mode</td>
+<td>Enter in dictation mode</td>
+</tr>
+<tr>
+<td>exit dictation mode</td>
+<td>Exit dictation mode</td>
+</tr>
+</tbody>
+</table>
+
+<p>If you want to add an internal command, open the little menu near the "Add" button and select "internal". Then replace "your key" by the "key" you will pronounce to call this command and replace "word" by one of those 5 actions' name.</p>
+
+<h4>
+<a id="some-words-about-dictation-mode" class="anchor" href="#some-words-about-dictation-mode" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Some words about dictation mode</h4>
+
+<p>The dictation mode let you type all word you pronouce. If you want to enter in the dictation mode use the dictation mode internal function. If you want to exit this mode just use the associated function. Dictation is not continue so you have to launch Mama for each sentence you want to type</p>
+
+<h3>
+<a id="modules" class="anchor" href="#modules" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modules</h3>
+
+<p>In order to extand Mama very easily I've implemented a system of modules that lets developers adds their own scripts in Mama. Besides, all modules will receive the text that you pronounce in parameter</p>
+
+<h4>
+<a id="modules-description" class="anchor" href="#modules-description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Module's description</h4>
+
+<p>A module is basically, an executable file that will receive some text in argument. each module embed its configuration in your configuration file. Two fields are recorded for each module:</p>
+
+<ul>
+<li>linker
+a vord that let us distinguish the call to the module and the parameter we have to send to this module. For example, if I want to configure the module google, I can choose the linker "google " because when I make a research I say:</li>
+</ul>
+
+<pre><code>google who is barack obama
+</code></pre>
+
+<p>So, the google module will be call with <code>who is barack obama</code> in parameter.</p>
+
+<ul>
+<li>spacebyplus
+If spacebyplus=1 then space are replace py +.</li>
+</ul>
+
+<h4>
+<a id="how-to-add-a-module" class="anchor" href="#how-to-add-a-module" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to add a module</h4>
+
+<p>If you want to add a script,  the gui will help you to create one and will place the module in :</p>
+
+<pre><code>~/.config/mama/modules
+</code></pre>
+
+<p>You can add a module by opening the menu near to the "Add" button then selecting the executable files of the module.
+Yu can also simply drag&amp;drop this executable on the treeview and the module will be automatically added. When you add a new module you don't have to modify the <code>action</code> field in the newline. You just have to modify the <code>key</code> field in the gui.</p>
+
+<h4>
+<a id="already-available" class="anchor" href="#already-available" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Already available</h4>
+
+<p>Mama already comes with 6 modules:</p>
+
+<ul>
+<li>
+<strong>google</strong>
+This plugin allows you to make search on Google and open the web browser on the search page you ask for.</li>
+<li>
+<strong>wikipedia</strong>
+This plugin allows you to make search on Wikipedia</li>
+<li>
+<strong>youtube</strong>
+This plugin allows you to make search on YouTube
+So your locations need to be between the word "between" and "and"</li>
+<li>
+<strong>weather</strong>
+This plugin allows you to ask Google to show you the weather for a city</li>
+<li>
+<strong>goto</strong>
+This plugin allows you to open a new web page with the web page you want. For example if you have configurated the plugin liker this:</li>
+</ul>
+
+<pre><code>your sentence = go to
+linker = to
+</code></pre>
+
+<p>Then if you say "go to gmail.com", a new web page is going to be open with gmail.com</p>
+
+<ul>
+<li>
+<strong>meaning</strong>
+This plugin allows you to ask to the meaning of a word, for exemple if I ask:</li>
+</ul>
+
+<pre><code>meaning barack obama
+</code></pre>
+
+<p>The plugin will tell me that he is the actual president of the US</p>
+
+<h4>
+<a id="note-for-the-user" class="anchor" href="#note-for-the-user" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Note for the user</h4>
+
+<p>Perhaps, you will have to modify the linker field of those module by selecting the module and clicking on the edit button</p>
+
+<h1>
+<a id="go-linux-automation" class="anchor" href="#go-linux-automation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Go Linux automation</h1>
+
+<p>Once you have personalized and take care about the commands already included in Mama, you can launch the recognition by launching <code>Mama.py</code></p>
+
+<p>A little sound is played and a notification tell you to speak. Then the notification show the result and the action associated to the text you have pronounced is played.</p>
+
+<h1>
+<a id="how-to-contribute" class="anchor" href="#how-to-contribute" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How-to contribute</h1>
+
+<h2>
+<a id="design-some-modules" class="anchor" href="#design-some-modules" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Design some modules</h2>
+
+<p>If you want you can write a module that will be integrated in the Github page, the user will have to download it and will be able to use it</p>
+
+<h2>
+<a id="translate-the-app" class="anchor" href="#translate-the-app" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Translate the app</h2>
+
+<h3>
+<a id="translate-the-mama-core" class="anchor" href="#translate-the-mama-core" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Translate the Mama core</h3>
+
+<p>If you want to translate this app, you need first to download the <a href="https://github.com/benoitfragit/Mama/archive/master.zip">project</a> then unzip it and open a terminal and place yourself in the folder newly created. Then, be sure that all string that you want to translate are like that:</p>
+
+<pre><code>_('text to translate')
+</code></pre>
+
+<p>Then be sure, that there is this at the begenning of the file you want to translate (only needed for Mama.py, gogl2ubuntu-manager.py)</p>
+
+<pre><code>import gettext
+
+gettext.install('Mama',os.path.dirname(os.path.abspath(__file__))+'/i18n/')
+</code></pre>
+
+<p>So, if you want to add a new language, you should type:</p>
+
+<pre><code>mkdir -p i18n/&lt;new_language/LC_MESSAGES
+xgettext --language=Python --keyword=_ --output=./i18n/Mama.pot ./*.py librairy/*.py
+msginit --input=./i18n/Mama.pot --output=./i18n/&lt;new_language&gt;/LC_MESSAGES/Mama.po
+</code></pre>
+
+<p>The 2 first line are optional and are usefull only there is no .pot file in the i18n/ folder.</p>
+
+<p>Then, open the <code>.po</code> file and translate all the line, then compoile the <code>.po</code> :</p>
+
+<pre><code>msgfmt ./i18n/&lt;new_language&gt;/LC_MESSAGES/Mama.po --output-file ./i18n/&lt;new_language&gt;/LC_MESSAGES/Mama.mo
+</code></pre>
+
+<h3>
+<a id="update-the-translation" class="anchor" href="#update-the-translation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update the translation</h3>
+
+<p>To update an existing translation, you have to do several actions:</p>
+
+<pre><code>xgettext --language=Python --keyword=_ --output=./i18n/Mama.pot ./*.py librairy/*.py
+msgmerge --update --no-fuzzy-matching --backup=off ./i18n/&lt;current_language&gt;/LC_MESSAGES/Mama.po ./i18n/Mama.pot
+</code></pre>
+
+<p>Then translate new line and compile the <code>.po</code>:</p>
+
+<pre><code>msgfmt ./i18n/&lt;current_language&gt;/LC_MESSAGES/Mama.po --output-file ./i18n/&lt;current_language&gt;/LC_MESSAGES/Mama.mo
+</code></pre>
+
+<h2>
+<a id="share-ideas" class="anchor" href="#share-ideas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Share ideas</h2>
+
+<p>You can share ideas and contact me on the google+ comunauty:
+<a href="https://plus.google.com/u/0/communities/103854623082229435165">Mama</a></p>
+
+<h2>
+<a id="demonstration" class="anchor" href="#demonstration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demonstration</h2>
+
+<p><a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=vkuX4tqaLFU%0A"><img src="http://img.youtube.com/vi/vkuX4tqaLFU/0.jpg" alt="Mama" width="480" height="360" border="5"></a></p>
+
+<h2>
+<a id="documentation-page" class="anchor" href="#documentation-page" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documentation page</h2>
+
+<p>I've wrote a documentation page with Sphinx
+<a href="http://benoitfragit.github.io/Mama/">Documentation</a></p>
+
+<h1>
+<a id="update" class="anchor" href="#update" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update</h1>
+
+<h2>
+<a id="improvements" class="anchor" href="#improvements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Improvements</h2>
+
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Addons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding a menu to change language</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding a class to manage locale easily</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding a dictation mode</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding the possibility to reconfigure a module from Mama-manager</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>drag &amp; drop a folder automaticcaly add a line in the treeview with a command to open it</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding a man page</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding spanish translation</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding deutch translation</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding italian translation</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>correct dependancies</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding Sox not recording in 16kHz bug fixe</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>correct module setup button bug</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>correct pyGobject constructor issue</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>regroupe both remove all and delete in one button</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>delete button bug fixe when no item selected</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>localHelper not cut locale name</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>beginning to work on the HelpWindow</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>changing i18n locale's folder name</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>correct a bug due to module execution</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding pt_BR support</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding pt_PT support</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding traditional chinese translation</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>correct the wikipedia module</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding nl_NL support</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>simplify module configuration storage</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding an edit button that open an edit window</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>adding an hotword mode</td>
+</tr>
+<tr>
+<td><img src="http://www.pronosoft.com/fr/bookmakers/img/logo_ok.png" alt="done"></td>
+<td>Support for google web speech api v2</td>
+</tr>
+<tr>
+<td><img src="http://www.yabo-concept.ch/admin/themes/YaboConcept/images/icons/system/false.gif" alt="todo"></td>
+<td>update the documentation</td>
+</tr>
+<tr>
+<td><img src="http://www.yabo-concept.ch/admin/themes/YaboConcept/images/icons/system/false.gif" alt="todo"></td>
+<td>improve translation</td>
+</tr>
+<tr>
+<td><img src="http://www.yabo-concept.ch/admin/themes/YaboConcept/images/icons/system/false.gif" alt="todo"></td>
+<td>bug fixe</td>
+</tr>
+<tr>
+<td><img src="http://www.yabo-concept.ch/admin/themes/YaboConcept/images/icons/system/false.gif" alt="todo"></td>
+<td>adding russian translation</td>
+</tr>
+</tbody>
+</table>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/maateen/mama">Mama</a> is maintained by <a href="https://github.com/maateen">maateen</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
