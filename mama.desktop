@@ -1,11 +1,12 @@
 [Desktop Entry]
 Type=Application
 Encoding=UTF-8
-Name=google2ubuntu
-GenericName=google2ubuntu
+Name=mama
+GenericName=mama
 Comment=Utiliser la reconnaissance vocale de Google
-Icon=/usr/share/google2ubuntu/resources/icons.png
-Exec=/usr/share/google2ubuntu/google2ubuntu.py
+Icon=/usr/share/mama/resources/icons.png
+Exec=/usr/share/mama/mama.py
 Terminal=false
 StartupNotify=false
 Categories=Application
+Name[en_US]=mama.desktop

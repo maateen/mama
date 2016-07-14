@@ -1,21 +1,17 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-  
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-from gi.repository import Notify
-from gi.repository import Gdk
-from gi.repository import Gio
-from os.path import expanduser
-import os, sys, subprocess, gettext
+import os
 
-# gère l'apparition de la fenêtre de choix du module
+# manage the development of the module selection window
 class moduleSelection():
     """
-    @description: This class display an fileChooserDialog when the user 
+    @description: This class display an fileChooserDialog when the user
     wants to add a new module from the menu of the main window
     """
     def __init__(self):
         w=Gtk.Window()
-        dialog = Gtk.FileChooserDialog(_("Choose a file"), w,Gtk.FileChooserAction.OPEN,(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,Gtk.STOCK_OPEN, Gtk.ResponseType.OK))        
+        dialog = Gtk.FileChooserDialog(_("Choose a file"), w,Gtk.FileChooserAction.OPEN,(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
         dialog.set_default_size(800, 400)
 
         response = dialog.run()
@@ -26,11 +22,11 @@ class moduleSelection():
             print("Cancel clicked")
 
         dialog.destroy()
-    
+
     def getModule(self):
         """
         @description: return the module selected
-        
+
         @return: return the path to the executable of the module
         """
         return self.module
