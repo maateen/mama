@@ -57,8 +57,8 @@ class interface():
 
         print("config file:", config_file)
 
-        clientId = "68b69b7e0be3420fbc00e68c17e14dbb"
-        clientSecret = "2cf7c9cce83242d88ac7b1204251c198"
+        clientId = client_id
+        clientSecret = api_key
         Host = "https://speech.platform.bing.com"
 
         params = urllib.parse.urlencode({'grant_type': 'client_credentials', 'client_id': clientId, 'client_secret': clientSecret, 'scope': Host})
