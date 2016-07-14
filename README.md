@@ -43,6 +43,8 @@ For the moment, dependancies are:
 * libsox-fmt-mp3
 * acpi
 * python3-simplejson
+* python3-xmltodict
+* python3-pyaudio
 
 If you are installing Mama from source not from deb or from ppa, type this:
 ```
