@@ -12,14 +12,8 @@ class HelpWindow():
         self.aboutdialog = Gtk.AboutDialog()
 
         # lists of authors and documenters (will be used later)
-        authors = ["Maksudur Rahman Maateen <http://maateen.me/>", "Franquet Benoit <benoitfranquet@gmail.com>", "Adrian Stöckl <naturo_vivi@gmx.at>", "Daniele Scasciafratte <mte90@linux.it>", "Levan", "Ladios Jonquil", "Josh Chen"]
-        documenters = ["Maksudur Rahman Maateen <http://maateen.me/>", "Franquet Benoit <benoitfranquet@gmail.com>"]
-        translators = "Franquet Benoit <benoitfranquet@gmail.com>\n"
-        translators += "Adrian Stöckl <naturo_vivi@gmx.at>\n"
-        translators += "Daniele Scasciafratte <mte90@linux.it>\n"
-        translators += "Leor <leor.bi.otti.flor@gmail.com﻿>\n"
-        translators += "Ladios Jonquil\n"
-        translators += "Franck Claessen <f.a.n.claessen@gmail.com>"
+        authors = ["Maksudur Rahman Maateen <http://maateen.me/>"]
+        documenters = ["Maksudur Rahman Maateen <http://maateen.me/>"]
 
         # we fill in the aboutdialog
         self.aboutdialog.set_program_name(_("About Mama"))
@@ -31,7 +25,6 @@ class HelpWindow():
         self.aboutdialog.set_website_label("https://maateen.github.io/mama/")
         self.aboutdialog.set_authors(authors)
         self.aboutdialog.set_documenters(documenters)
-        self.aboutdialog.set_translator_credits(translators)
 
         # Resetting the window title
         self.aboutdialog.set_title("About Mama")
