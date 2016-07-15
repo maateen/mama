@@ -1,5 +1,5 @@
-from workWithModule import workWithModule
-from basicCommands import basicCommands
+from WorkWithModule import WorkWithModule
+from BasicCommands import BasicCommands
 import xml.etree.ElementTree as ET
 import os, sys
 
@@ -13,6 +13,7 @@ class stringParser():
         # read configuration files
         self.pid=PID
         try:
+            print('try')
             max = 0
             text=text.lower()
             tree = ET.parse(File)
@@ -20,7 +21,9 @@ class stringParser():
             tp = ''
             # if the dictation mode is activated
             if os.path.exists('/tmp/mama/mama_dictation'):
+                print('if')
                 for entry in root.findall('entry'):
+                    print('for-1')
                     if entry.get('name') == _('internal') and entry.find('command').text == unicode(_('exit dictation mode'),"utf8"):
                         score = 0
                         Type=entry.get('name')
@@ -36,7 +39,10 @@ class stringParser():
                         else:
                             do = text
             else:
+                print('else')
                 for entry in root.findall('entry'):
+                    print('for-2')
+                    print('now')
                     score = 0
                     Type=entry.get('name')
                     Key=entry.find('key').text
@@ -71,7 +77,7 @@ class stringParser():
             elif _('internal') in tp:
                 # we execute an internal command, the command is configured
                 # and internal / battery, battery is sent to the function
-                b = basicCommands(do,self.pid)
+                b = BasicCommands(do, self.pid)
             elif _('external') in tp:
                 os.system(do+' &')
             else:
