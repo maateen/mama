@@ -42,6 +42,7 @@ For the moment, dependancies are:
 * xdotool
 * libsox-fmt-mp3
 * acpi
+* exo-utils
 * python3-simplejson
 * python3-xmltodict
 * python3-pyaudio
