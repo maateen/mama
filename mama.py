@@ -1,6 +1,9 @@
 import sys
 from os import system
-from os.path import abspath, dirname, exists, expanduser
+from os.path import abspath
+from os.path import dirname
+from os.path import exists
+from os.path import expanduser
 
 sys.path.append(dirname(abspath(__file__)) + '/library')
 from Interface import Interface
