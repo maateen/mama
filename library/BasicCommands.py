@@ -83,34 +83,26 @@ class BasicCommands():
             output = output.decode("utf-8", "strict")[:-1]
             output = output.replace(',', '')
             output = output.split(' ')
-            print(output)
         else:
             print(error)
         # parsing output
         if 'Battery' in output:
             battery_percentage = output[3]
-            print(battery_percentage)
             if len(output) > 4:
                 remaining_time = output[4]
-                print(remaining_time)
 
                 if 'Charging' in output:
                     message = 'Charging' + ', now ' + battery_percentage + ', ' + \
                               remaining_time + ' ' + 'until charged'
-                    print(message)
                 else:
                     message = 'Discharging' + ', now ' + battery_percentage + ', ' \
                                                                               '' + \
                               remaining_time + ' ' + 'remaining'
-                    print(message)
             else:
                 message = 'Not charging, ' + battery_percentage + ' remaining'
-                print(message)
         else:
             message = 'battery is not plugged'
-            print(message)
 
-        print('here')
         print(message)
         os.system('echo "' + message + '" > /tmp/mama/mama_display_' + self.pid)
         TextToSpeech(self.config, message)
