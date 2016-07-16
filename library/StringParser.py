@@ -1,92 +1,68 @@
-from WorkWithModule import WorkWithModule
-from BasicCommands import BasicCommands
+import os
+import sys
 import xml.etree.ElementTree as ET
-import os, sys
 
-# Let you run the command associated with a spoken word
-class stringParser():
+from BasicCommands import BasicCommands
+from WorkWithModule import WorkWithModule
+
+
+class StringParser():
     """
-    @description: This class parses the text retrieve by Google in order
+    @description: This class parses the text retrieve by Microsoft in order
     to distinguish external commands, internal commands and modules
     """
-    def __init__(self,text,File,PID):
+
+    def __init__(self, config, text, File, PID):
         # read configuration files
-        self.pid=PID
+        self.pid = PID
         try:
-            print('try')
-            max = 0
-            text=text.lower()
+            max_size = 0
+            text = text.lower()
             tree = ET.parse(File)
             root = tree.getroot()
             tp = ''
-            # if the dictation mode is activated
-            if os.path.exists('/tmp/mama/mama_dictation'):
-                print('if')
-                for entry in root.findall('entry'):
-                    print('for-1')
-                    if entry.get('name') == _('internal') and entry.find('command').text == unicode(_('exit dictation mode'),"utf8"):
-                        score = 0
-                        Type=entry.get('name')
-                        Key=entry.find('key').text
-                        Command=entry.find('command').text
-                        key=Key.split(' ')
-                        for j in range(len(key)):
-                            score += text.count(key[j])
 
-                        if score == len(key):
-                            do = Command
-                            tp = Type
-                        else:
-                            do = text
-            else:
-                print('else')
-                for entry in root.findall('entry'):
-                    print('for-2')
-                    print('now')
-                    score = 0
-                    Type=entry.get('name')
-                    Key=entry.find('key').text
-                    Command=entry.find('command').text
-                    Linker = entry.find('linker').text
-                    Spacebyplus = entry.find('spacebyplus').text
+            for entry in root.findall('entry'):
+                score = 0
+                entry_name = entry.get('name')
+                voice_key = entry.find('key').text
+                command_to_apply = entry.find('command').text
+                the_linker = entry.find('linker').text
+                space_by_plus = entry.find('spacebyplus').text
 
-                    key=Key.split(' ')
-                    for j in range(len(key)):
-                        score += text.count(key[j])
+                key = voice_key.split(' ')
+                for j in range(len(key)):
+                    score += text.count(key[j])
 
-                    if max < score:
-                        max = score
-                        do = Command
-                        tp = Type
-                        linker = Linker
-                        spacebyplus = Spacebyplus
-
-            do = do.encode('utf8')
-            tp = tp.encode('utf8')
+                if max_size < score:
+                    max_size = score
+                    do = command_to_apply
+                    tp = entry_name
+                    linker = the_linker
+                    spacebyplus = space_by_plus
 
             print("key", tp)
             print("command", do)
 
-            os.system('echo "'+do+'" > /tmp/mama/mama_cmd_'+self.pid)
-            if _('modules') in tp:
-                # if we find the word "modules", a workWithModule class and we pass it we instantiate
+            os.system('echo "' + do + '" > /tmp/mama/mama_cmd_' + self.pid)
+            if 'modules' in tp:
+                # if we find the word "modules", a WorkWithModule class and we pass it we instantiate
                 # the folder ie weather, search, ...; the module name weather.sh ie, search.sh and against delivery
-                linker = linker.encode('utf8')
-                spacebyplus = spacebyplus.encode('utf8')
-                wm = workWithModule(do,text,linker,spacebyplus,self.pid)
-            elif _('internal') in tp:
+                WorkWithModule(do, text, linker, spacebyplus, self.pid)
+            elif 'internal' in tp:
                 # we execute an internal command, the command is configured
                 # and internal / battery, battery is sent to the function
-                b = BasicCommands(do, self.pid)
-            elif _('external') in tp:
-                os.system(do+' &')
+                BasicCommands(config, do, self.pid)
+            elif 'external' in tp:
+                os.system(do + ' &')
             else:
-                os.system('xdotool type "'+do+'"')
+                os.system('xdotool type "' + do + '"')
 
-            os.system('> /tmp/mama/mama_stop_'+self.pid)
+            os.system('> /tmp/mama/mama_stop_' + self.pid)
 
 
         except Exception as e:
-            message = _('Setup file missing')
-            os.system('echo "'+message+'" > /tmp/mama/mama_error_'+self.pid)
+            message = 'Setup file missing'
+            os.system(
+                'echo "' + message + '" > /tmp/mama/mama_error_' + self.pid)
             sys.exit(1)
