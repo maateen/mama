@@ -1,49 +1,47 @@
-from os.path import expanduser
-import sys, os, gettext, locale
+import sys
+from os import system
+from os.path import abspath, dirname, exists, expanduser
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__))+'/library')
-from interface import interface
-from localehelper import LocaleHelper
+sys.path.append(dirname(abspath(__file__)) + '/library')
+from Interface import Interface
 
-localeHelper = LocaleHelper()
-lang = localeHelper.getLocale()
-
-t=gettext.translation('mama',os.path.dirname(os.path.abspath(__file__))+'/i18n/',languages=[lang])
-t.install()
-
-
+# Declaring some variables, config{} dict will contain all config info
+config = {}
+config_file = expanduser('~') + '/.config/mama/mama.conf'
+temp_dir = '/tmp/mama/'
 # pause media player if necessary
-config = expanduser('~')+'/.config/mama/mama.conf'
-paused = False
-haskey = False
-client_id = ''
-api_key = ''
+config['paused'] = False
+has_key = False
+has_id = False
+
+# Lets check the existence of temp_dir, create if not
+if not exists(temp_dir):
+    system("mkdir -p '" + temp_dir + "'")
 
 try:
-    with open(config,"r") as f:
+    with open(config_file, "r") as f:
         for line in f.readlines():
             line = line.strip('\n')
             field = line.split('=')
-            if field[0] == 'pause' and field[1].replace('"','') != '':
-                os.system(field[1].replace('"','')+' &')
-                paused = True
+            if field[0] == 'pause' and field[1].replace('"', '') != '':
+                system(field[1].replace('"', '') + ' &')
+                config['paused'] = True
             elif field[0] == 'play':
-                play_command = field[1].replace('"','')
-            elif field[0] == 'client_id' and field[1].replace('"','') != '':
-                client_id = field[1].replace('"','')
-                hasid = True
-            elif field[0] == 'api_key' and field[1].replace('"','') != '':
-                api_key = field[1].replace('"','')
-                haskey = True
+                config['play_command'] = field[1].replace('"', '')
+            elif field[0] == 'client_id' and field[1].replace('"', '') != '':
+                config['client_id'] = field[1].replace('"', '')
+                has_id = True
+            elif field[0] == 'api_key' and field[1].replace('"', '') != '':
+                config['api_key'] = field[1].replace('"', '')
+                has_key = True
 
 except Exception:
     print("Error reading mama.conf file")
 
-if hasid == True and haskey == True:
-    print(client_id, api_key)
+if has_id and has_key:
     # launch the recognition
-    mama = interface(client_id, api_key)
+    Interface(config)
 
     # restore media player state
     if paused:
-        os.system(play_command+' &')
+        system(play_command + ' &')
