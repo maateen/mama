@@ -4,8 +4,9 @@ import os, sys
 try:
     if sys.argv[1]:
         param = sys.argv[1]
-        print(param)
-        os.system("http://en.wikipedia.org/w/index.php?search=\"+param+\"")
+        execute = "xdg-open https://en.wikipedia.org/wiki/" + param + ""
+        print(execute)
+        os.system(execute)
     else:
         print("Not enough parameters to search on wikipedia.")
 except:
