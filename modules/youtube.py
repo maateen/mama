@@ -4,9 +4,10 @@ import os, sys
 try:
     if sys.argv[1]:
         param = sys.argv[1]
-        print(param)
-        os.system(
-            "xdg-open http://www.youtube.com/results?search_query=\"+param+\"")
+        execute = "xdg-open https://www.youtube.com/results?search_query" \
+                  "=" + param + ""
+        print(execute)
+        os.system(execute)
     else:
         print("Not enough parameters to search on youtube.")
 except:
