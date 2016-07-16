@@ -9,17 +9,17 @@ class TextToSpeech():
     """
     @description: Let mama to use the Microsoft Bing Text-to-Speech API
 
-    @param client_id
-        Microsoft Azure Client ID
-
-    @param api_key
-        Microsoft Bing Speech API Key
+    @param config
+        A dictionary containing Microsoft Bing Speech API Key and Azure
+        client ID, also some other info
 
     @param text
         the text to read to the user
     """
 
-    def __init__(self, client_id, api_key, text):
+    def __init__(self, config, text):
+        client_id = config['client_id']
+        api_key = config['api_key']
         host = "https://speech.platform.bing.com"
 
         params = urllib.parse.urlencode(
