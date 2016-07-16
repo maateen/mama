@@ -1,65 +1,75 @@
-from os.path import expanduser
-from localehelper import LocaleHelper
-import urllib, urllib.request, time, re, unicodedata, os, sys, locale
+import http.client
+import json
+import os
+import sys
+import urllib.parse
 
-class tts():
+
+class TextToSpeech():
     """
-    @description: Let mama to use the Google tts API
+    @description: Let mama to use the Microsoft Bing Text-to-Speech API
 
-    @param: the text to read to the user
+    @param client_id
+        Microsoft Azure Client ID
+
+    @param api_key
+        Microsoft Bing Speech API Key
+
+    @param text
+        the text to read to the user
     """
-    def __init__(self,text):
-        # need to put this line
-        locale.setlocale(locale.LC_ALL, '')
 
-        # make the program able to switch language
-        p = os.path.dirname(os.path.abspath(__file__)).strip('librairy')
-        localeHelper = LocaleHelper()
-        lc = localeHelper.getLocale()
-        text = unicodedata.normalize('NFKD', unicode(text,"utf-8"))
-        text=text.encode("utf8")
-        text = text.replace('\n',' ')
-        text_list = re.split('(\,|\.)', text)
-        combined_text = []
-        output=open('/tmp/tts.mp3',"w")
+    def __init__(self, client_id, api_key, text):
+        host = "https://speech.platform.bing.com"
 
-        for idx, val in enumerate(text_list):
-            if idx % 2 == 0:
-                combined_text.append(val)
-            else:
-                joined_text = ''.join((combined_text.pop(),val))
-                if len(joined_text) < 100:
-                    combined_text.append(joined_text)
-                else:
-                    subparts = re.split('( )', joined_text)
-                    temp_string = ""
-                    temp_array = []
-                    for part in subparts:
-                        temp_string = temp_string + part
-                        if len(temp_string) > 80:
-                            temp_array.append(temp_string)
-                            temp_string = ""
-                    #append final part
-                    temp_array.append(temp_string)
-                    combined_text.extend(temp_array)
-        #download chunks and write them to the output file
-        for idx, val in enumerate(combined_text):
-            mp3url = "http://translate.google.com/translate_tts?ie=UTF-8&tl=%s&q=%s&total=%s&idx=%s" % (lc, urllib.quote(val), len(combined_text), idx)
-            print("mp3url")
-            headers = {"Host":"translate.google.com",
-            "Referer":"http://www.gstatic.com/translate/sound_player2.swf",
-            "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.163 Safari/535.19"}
-            req = urllib.request.Request(mp3url, '', headers)
-            sys.stdout.write('.')
-            sys.stdout.flush()
-            if len(val) > 0:
-                try:
-                    response = urllib.request.urlopen(req)
-                    output.write(response.read())
-                    time.sleep(.5)
-                except urllib.request.HTTPError as e:
-                    print("%s" % e)
-        output.close()
+        params = urllib.parse.urlencode(
+            {'grant_type': 'client_credentials', 'client_id': client_id,
+             'client_secret': api_key, 'scope': host})
 
+        headers = {"Content-type": "application/x-www-form-urlencoded"}
 
-        os.system("play /tmp/tts.mp3 &")
+        access_token_host = "oxford-speech.cloudapp.net"
+        token_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                  "/token/issueToken")
+
+        # Connecting to server to get the Microsoft Bing Speech API Access Token
+        conn = http.client.HTTPSConnection(access_token_host, timeout=10)
+        conn.request("POST", token_path, params, headers)
+        response = conn.getresponse()
+        print(response.status)
+
+        if response.status == 200:
+            data = response.read()
+            conn.close()
+            access_token = data.decode("UTF-8")
+
+            # Decoding the object from json
+            decoded_data = json.loads(access_token)
+            access_token = decoded_data['access_token']
+
+            body = "<speak version='1.0' xml:lang='en-us'><voice " \
+                   "xml:lang='en-us' xml:gender='Male' name='Microsoft " \
+                   "Server Speech Text to Speech Voice (en-US, " \
+                   "BenjaminRUS)'>" + text + "</voice></speak>"
+
+            headers = {"Content-type": "application/ssml+xml",
+                       "X-Microsoft-OutputFormat": "riff-16khz-16bit-mono-pcm",
+                       "Authorization": "Bearer " + access_token,
+                       "X-Search-AppId": "07D3234E49CE426DAA29772419F436CA",
+                       "X-Search-ClientID": "1ECFAE91408841A480F00935DC390960",
+                       "User-Agent": "Mama"}
+
+            # Connect to server to synthesize the wave
+            conn = http.client.HTTPSConnection("speech.platform.bing.com")
+            conn.request("POST", "/synthesize", body, headers)
+            response = conn.getresponse()
+            print(response.status, response.reason)
+
+            data = response.read()
+            conn.close()
+            print("The synthesized wave length: %d" % (len(data)))
+            wf = open('/tmp/mama/tts.wav', 'wb')
+            wf.write(data)
+            wf.close()
+            os.system('play /tmp/mama/tts.wav')
+            sys.exit(1)
