@@ -44,4 +44,4 @@ if has_id and has_key:
 
     # restore media player state
     if config['paused']:
-        system(play_command + ' &')
+        system(config['play_command'] + ' &')
