@@ -1,12 +1,13 @@
 import gi
+
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from gi.repository import Gdk
-from Bingtts import tts
+from BingTextToSpeech import TextToSpeech
 import os, time, subprocess
 
-# Allows to appeal to basic functions
-class basicCommands():
+
+class BasicCommands():
     """
     @description: Called when the user wants to start an internal command
     for the moment there is 3 internal commands:
@@ -15,26 +16,27 @@ class basicCommands():
     * clipboard
     * hour
 
+    @param config
+        A dictionary containing Microsoft Bing Speech API Key and Azure
+        client ID, also some other info
+
     @param text
         name of the function to launch
 
     @param PID
         the program's pid to synchronize osd notification
     """
-    def __init__(self,text,PID):
+
+    def __init__(self, config, text, PID):
         # according to the received parameter, performs an action
+        self.config = config
         self.pid = PID
         if text == _('time'):
-            self.getTime()
+            self.get_time()
         elif text == _('power'):
-            self.getPower()
+            self.get_power()
         elif text == _('clipboard'):
             self.read_clipboard()
-        elif text == _('dictation mode'):
-            f=open('/tmp/mama/mama_dictation',"w")
-            f.close()
-        elif text == _('exit dictation mode'):
-            os.remove('/tmp/mama/mama_dictation')
         else:
             print("no action found")
 
@@ -46,46 +48,69 @@ class basicCommands():
         clipboard = Gtk.Clipboard.get(Gdk.SELECTION_PRIMARY)
 
         text = clipboard.wait_for_text()
-        if text != None:
-            text=text.replace("'",' ')
+        if text:
+            text = text.replace("'", ' ')
             print("read:", text)
-            tts(text)
+            TextToSpeech(self.config, text)
         else:
-            tts(_('Nothing in the clipboard'))
+            TextToSpeech(_('Nothing in the clipboard'))
 
-    def getTime(self):
+    def get_time(self):
         """
         @description: a function that let mama read and display
-        the current timme
+        the current time
         """
-        var=time.strftime('%H:%M',time.localtime())
-        hour=var.split(':')[0]
-        minute=var.split(':')[1]
+        var = time.strftime('%H:%M', time.localtime())
+        hour = var.split(':')[0]
+        minute = var.split(':')[1]
 
-        message = _('it is')+' '+hour+' '+_('hour')+' '+minute+' '+_('minute')
-        os.system('echo "'+var+'" > /tmp/mama/mama_display_'+self.pid)
+        message = _('it is') + ' ' + hour + ' ' + _(
+            'hour') + ' ' + minute + ' ' + _('minute')
+        os.system('echo "' + var + '" > /tmp/mama/mama_display_' + self.pid)
         print(message)
-        tts(message)
+        TextToSpeech(self.config, message)
 
-    def getPower(self):
+    def get_power(self):
         """
         @description: a function that let mama read and display
         the current power state
         """
         command = "acpi -b"
-        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-        output,error  = process.communicate()
-        #parsing output
-        if output.count('Battery') > 0:
-            pcent = output.split(' ')[3]
-            rtime = output.split(' ')[4]
-
-            if output.count('Charging') > 0:
-                message = _('Charging')+': '+pcent+'\n'+rtime+' '+_('before charging')
-            else:
-                message = _('Discharging')+': '+pcent+'\n'+rtime+' '+_('remaining')
+        process = subprocess.Popen(command, stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE, shell=True)
+        output, error = process.communicate()
+        if output:
+            output = output.decode("utf-8", "strict")[:-1]
+            output = output.replace(',', '')
+            output = output.split(' ')
+            print(output)
         else:
-            message = _('battery is not plugged')
+            print(error)
+        # parsing output
+        if 'Battery' in output:
+            battery_percentage = output[3]
+            print(battery_percentage)
+            if len(output) > 4:
+                remaining_time = output[4]
+                print(remaining_time)
 
-        os.system('echo "'+message+'" > /tmp/mama/mama_display_'+self.pid)
-        tts(message)
+                if 'Charging' in output:
+                    message = 'Charging' + ', now ' + battery_percentage + ', ' + \
+                              remaining_time + ' ' + 'until charged'
+                    print(message)
+                else:
+                    message = 'Discharging' + ', now ' + battery_percentage + ', ' \
+                                                                              '' + \
+                              remaining_time + ' ' + 'remaining'
+                    print(message)
+            else:
+                message = 'Not charging, ' + battery_percentage + ' remaining'
+                print(message)
+        else:
+            message = 'battery is not plugged'
+            print(message)
+
+        print('here')
+        print(message)
+        os.system('echo "' + message + '" > /tmp/mama/mama_display_' + self.pid)
+        TextToSpeech(self.config, message)
