@@ -14,7 +14,7 @@ class BasicCommands():
 
     * time
     * clipboard
-    * hour
+    * power
 
     @param config
         A dictionary containing Microsoft Bing Speech API Key and Azure
@@ -31,11 +31,11 @@ class BasicCommands():
         # according to the received parameter, performs an action
         self.config = config
         self.pid = PID
-        if text == _('time'):
+        if text == 'time':
             self.get_time()
-        elif text == _('power'):
+        elif text == 'power':
             self.get_power()
-        elif text == _('clipboard'):
+        elif text == 'clipboard':
             self.read_clipboard()
         else:
             print("no action found")
@@ -53,7 +53,7 @@ class BasicCommands():
             print("read:", text)
             TextToSpeech(self.config, text)
         else:
-            TextToSpeech(_('Nothing in the clipboard'))
+            TextToSpeech('Nothing in the clipboard')
 
     def get_time(self):
         """
@@ -64,8 +64,7 @@ class BasicCommands():
         hour = var.split(':')[0]
         minute = var.split(':')[1]
 
-        message = _('it is') + ' ' + hour + ' ' + _(
-            'hour') + ' ' + minute + ' ' + _('minute')
+        message = 'it is' + ' ' + hour + ' ' + 'hour' + ' ' + minute + ' ' + 'minute'
         os.system('echo "' + var + '" > /tmp/mama/mama_display_' + self.pid)
         print(message)
         TextToSpeech(self.config, message)
