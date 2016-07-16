@@ -43,5 +43,5 @@ if has_id and has_key:
     Interface(config)
 
     # restore media player state
-    if paused:
+    if config['paused']:
         system(play_command + ' &')
