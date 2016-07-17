@@ -84,4 +84,4 @@ if len(sys.argv) >= 2:
     n.show()
     n.close()
     Notify.uninit()
-    os.system('rm /tmp/mama/mama_*_' + PID + ' 2>/dev/null')
+    os.system('rm /tmp/mama/* 2>/dev/null')
