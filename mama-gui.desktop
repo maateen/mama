@@ -1,12 +1,11 @@
 [Desktop Entry]
 Type=Application
 Encoding=UTF-8
-Name=mama-manager
-GenericName=mama-manager
+Name=Mama Manager
+GenericName=Mama Manager
 Comment=mama manager
 Icon=/usr/share/mama/resources/icons.png
 Exec=/usr/share/mama/mama-manager.py
 Terminal=false
 StartupNotify=false
 Categories=Application
-Name[en_US]=mama-gui.desktop
