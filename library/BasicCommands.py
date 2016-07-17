@@ -67,7 +67,7 @@ class BasicCommands():
         message = 'it is' + ' ' + hour + ' ' + 'hour' + ' ' + minute + ' ' + 'minute'
         os.system('echo "' + var + '" > /tmp/mama/mama_display_' + self.pid)
         print(message)
-        TextToSpeech(self.config, message)
+        TextToSpeech(self.config, message, self.pid)
 
     def get_power(self):
         """
@@ -104,4 +104,4 @@ class BasicCommands():
 
         print(message)
         os.system('echo "' + message + '" > /tmp/mama/mama_display_' + self.pid)
-        TextToSpeech(self.config, message)
+        TextToSpeech(self.config, message, self.pid)
