@@ -58,7 +58,7 @@ class StringParser():
             else:
                 os.system('xdotool type "' + do + '"')
 
-            os.system('> /tmp/mama/mama_stop_' + self.pid)
+            os.system('touch /tmp/mama/mama_stop_' + self.pid)
 
 
         except Exception as e:
