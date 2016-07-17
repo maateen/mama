@@ -17,7 +17,7 @@ class TextToSpeech():
         the text to read to the user
     """
 
-    def __init__(self, config, text):
+    def __init__(self, config, text, pid):
         client_id = config['client_id']
         api_key = config['api_key']
         host = "https://speech.platform.bing.com"
@@ -72,4 +72,5 @@ class TextToSpeech():
             wf.write(data)
             wf.close()
             os.system('play /tmp/mama/tts.wav')
+            os.system('touch /tmp/mama/mama_stop_' + pid)
             sys.exit(1)
