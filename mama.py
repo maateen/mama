@@ -44,7 +44,3 @@ except Exception:
 if has_id and has_key:
     # launch the recognition
     Interface(config)
-
-    # restore media player state
-    if config['paused']:
-        system(config['play_command'] + ' &')
