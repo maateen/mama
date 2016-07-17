@@ -9,4 +9,3 @@ Exec=/usr/share/mama/mama.py
 Terminal=false
 StartupNotify=false
 Categories=Application
-Name[en_US]=mama.desktop
