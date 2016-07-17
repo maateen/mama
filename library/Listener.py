@@ -1,5 +1,6 @@
+import os
+
 import wave
-from os import system
 
 import pyaudio
 
@@ -9,13 +10,13 @@ class Listener():
     @description: This class will record the voice as wav.
     """
 
-    def __init__(self, pid):
+    def __init__(self, parent_dir, pid):
         CHUNK = 1024
         FORMAT = pyaudio.paInt16  # paInt8
         CHANNELS = 2
         RATE = 8000  # sample rate
         RECORD_SECONDS = 3
-        WAV_FILE_PATH = "output.wav"
+        WAV_FILE_PATH = "/tmp/mama/output.wav"
 
         p = pyaudio.PyAudio()
 
@@ -25,7 +26,10 @@ class Listener():
                         input=True,
                         frames_per_buffer=CHUNK)  # buffer
 
+        # we play a sound to signal the start
+        os.system('play ' + parent_dir + 'resources/sound.wav')
         print("* recording")
+        os.system('touch /tmp/mama/mama_start_' + pid)
 
         frames = []
 
@@ -34,6 +38,7 @@ class Listener():
             frames.append(data)  # 2 bytes(16 bits) per channel
 
         print("* done recording")
+        os.system('touch /tmp/mama/mama_record_complete_' + pid)
 
         stream.stop_stream()
         stream.close()
@@ -45,4 +50,3 @@ class Listener():
         wf.setframerate(RATE)
         wf.writeframes(b''.join(frames))
         wf.close()
-        system('> /tmp/mama/mama_stop_' + pid)
