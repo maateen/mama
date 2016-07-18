@@ -12,8 +12,6 @@ from Interface import Interface
 config = {}
 config_file = expanduser('~') + '/.config/mama/mama.conf'
 temp_dir = '/tmp/mama/'
-# pause media player if necessary
-config['paused'] = False
 has_key = False
 has_id = False
 
@@ -26,17 +24,20 @@ try:
         for line in f.readlines():
             line = line.strip('\n')
             field = line.split('=')
-            if field[0] == 'pause' and field[1].replace('"', '') != '':
-                system(field[1].replace('"', '') + ' &')
-                config['paused'] = True
-            elif field[0] == 'play':
-                config['play_command'] = field[1].replace('"', '')
-            elif field[0] == 'client_id' and field[1].replace('"', '') != '':
-                config['client_id'] = field[1].replace('"', '')
-                has_id = True
-            elif field[0] == 'api_key' and field[1].replace('"', '') != '':
-                config['api_key'] = field[1].replace('"', '')
-                has_key = True
+            if field[0] == 'audio_chunk':
+                self.audio_chunk = int(field[1])
+            elif field[0] == 'audio_format':
+                self.audio_format = field[1].replace('"', '')
+            elif field[0] == 'audio_channels':
+                self.audio_channels = int(field[1])
+            elif field[0] == 'audio_rate':
+                self.audio_rate = int(field[1])
+            elif field[0] == 'recording_time':
+                self.recording_time = int(field[1])
+            elif field[0] == 'client_id':
+                self.client_id = field[1].replace('"', '')
+            elif field[0] == 'api_key':
+                self.api_key = field[1].replace('"', '')
 
 except Exception:
     print("Error reading mama.conf file")
