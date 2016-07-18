@@ -7,7 +7,7 @@ import time
 from gi.repository import Notify
 
 RESULT = False
-path = os.path.dirname(os.path.abspath(__file__)).strip('librairy')
+path = os.path.dirname(os.path.abspath(__file__))
 path += 'resources'
 
 if len(sys.argv) >= 2:
