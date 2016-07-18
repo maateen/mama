@@ -23,7 +23,7 @@ class Interface():
 
         # Initialization notifications
         os.system(
-            'python3 ' + self.p + 'library/notifier.py ' + self.PID + ' &')
+            'python3 ' + self.p + 'notifier.py ' + self.PID + ' &')
 
         # We launch the recorder
         Listener(self.p, self.PID)
