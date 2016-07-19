@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Mama Manager
+Comment=Manage and control Mama from this GUI
+Exec=python3 /usr/share/mama/mama-manager.py
+Icon=/usr/share/mama/resources/icons.png
+Terminal=false
+Type=Application
+Categories=Utility;Application;
