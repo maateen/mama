@@ -16,14 +16,16 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 TARGET_TYPE_URI_LIST = 80
-dnd_list = [Gtk.TargetEntry.new('text/uri-list', 0, TARGET_TYPE_URI_LIST )]
+dnd_list = [Gtk.TargetEntry.new('text/uri-list', 0, TARGET_TYPE_URI_LIST)]
 
-class add_window():
+
+class AddWindow():
     """
     @description: This class allow the user to manage all his commands thanks
     to a treeview. The grid generated will be added to the window
     """
-    def __init__(self,button_config):
+
+    def __init__(self, button_config):
         self.Button = button_config
         # Gtk.ListStore will hold data for the TreeView
         # Only the first two columns will be displayed
@@ -34,6 +36,10 @@ class add_window():
 
         # use a filter in order to filtering the data
         self.tree_filter = store.filter_new()
+
+        # getting parent directory and icon directory
+        self.path = os.path.dirname(os.path.abspath(__file__)).strip('librairy')
+        self.icon_path = self.path + 'resources/icons/'
 
         # create the treeview
         treeview = Gtk.TreeView.new_with_model(self.tree_filter)
