@@ -4,6 +4,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from gi.repository import Gdk
 from BingTextToSpeech import TextToSpeech
+from MessageDialogWindow import MessageDialogWindow
 import os, time, subprocess
 
 
@@ -38,7 +39,9 @@ class BasicCommands():
         elif text == 'clipboard':
             self.read_clipboard()
         else:
-            print("no action found")
+            error_dialog = MessageDialogWindow("No action found!")
+            error_dialog.show_error_message()
+            error_dialog.show_all()
 
     def read_clipboard(self):
         """
@@ -50,7 +53,6 @@ class BasicCommands():
         text = clipboard.wait_for_text()
         if text:
             text = text.replace("'", ' ')
-            print("read:", text)
             TextToSpeech(self.config, text)
         else:
             TextToSpeech('Nothing in the clipboard')
@@ -66,7 +68,6 @@ class BasicCommands():
 
         message = 'it is' + ' ' + hour + ' ' + 'hour' + ' ' + minute + ' ' + 'minute'
         os.system('echo "' + var + '" > /tmp/mama/mama_display_' + self.pid)
-        print(message)
         TextToSpeech(self.config, message, self.pid)
 
     def get_power(self):
@@ -83,7 +84,9 @@ class BasicCommands():
             output = output.replace(',', '')
             output = output.split(' ')
         else:
-            print(error)
+            error_dialog = MessageDialogWindow(error)
+            error_dialog.show_error_message()
+            error_dialog.show_all()
         # parsing output
         if 'Battery' in output:
             battery_percentage = output[3]
@@ -102,6 +105,5 @@ class BasicCommands():
         else:
             message = 'battery is not plugged'
 
-        print(message)
         os.system('echo "' + message + '" > /tmp/mama/mama_display_' + self.pid)
         TextToSpeech(self.config, message, self.pid)
