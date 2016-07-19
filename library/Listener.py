@@ -10,31 +10,32 @@ class Listener():
     @description: This class will record the voice as wav.
     """
 
-    def __init__(self, parent_dir, pid):
-        CHUNK = 1024
-        FORMAT = pyaudio.paInt16  # paInt8
-        CHANNELS = 2
-        RATE = 8000  # sample rate
-        RECORD_SECONDS = 3
-        WAV_FILE_PATH = "/tmp/mama/output.wav"
+    def __init__(self, config, pid):
+        audio_chunk = config['audio_chunk']
+        audio_format = pyaudio.paInt16  # paInt8
+        audio_channels = config['audio_channels']
+        audio_rate = config['audio_rate']
+        recording_time = config['recording_time']
+        wav_file_path = "/tmp/mama/output.wav"
 
         p = pyaudio.PyAudio()
 
-        stream = p.open(format=FORMAT,
-                        channels=CHANNELS,
-                        rate=RATE,
+        stream = p.open(format=audio_format,
+                        channels=audio_channels,
+                        rate=audio_rate,
                         input=True,
-                        frames_per_buffer=CHUNK)  # buffer
+                        frames_per_buffer=audio_chunk)  # buffer
 
         # we play a sound to signal the start
+        parent_dir = os.path.dirname(os.path.abspath(__file__)).strip('librairy')
         os.system('play ' + parent_dir + 'resources/sound.wav')
         print("* recording")
         os.system('touch /tmp/mama/mama_start_' + pid)
 
         frames = []
 
-        for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
-            data = stream.read(CHUNK)
+        for i in range(0, int(audio_rate / audio_chunk * recording_time)):
+            data = stream.read(audio_chunk)
             frames.append(data)  # 2 bytes(16 bits) per channel
 
         print("* done recording")
@@ -44,9 +45,9 @@ class Listener():
         stream.close()
         p.terminate()
 
-        wf = wave.open(WAV_FILE_PATH, 'wb')
-        wf.setnchannels(CHANNELS)
-        wf.setsampwidth(p.get_sample_size(FORMAT))
-        wf.setframerate(RATE)
+        wf = wave.open(wav_file_path, 'wb')
+        wf.setnchannels(audio_channels)
+        wf.setsampwidth(p.get_sample_size(audio_format))
+        wf.setframerate(audio_rate)
         wf.writeframes(b''.join(frames))
         wf.close()
