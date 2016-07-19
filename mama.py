@@ -24,23 +24,31 @@ try:
         for line in f.readlines():
             line = line.strip('\n')
             field = line.split('=')
-            if field[0] == 'audio_chunk':
-                self.audio_chunk = int(field[1])
-            elif field[0] == 'audio_format':
-                self.audio_format = field[1].replace('"', '')
+            if field[0] == 'locale':
+                config['locale'] = field[1].replace('"', '')
+            elif field[0] == 'audio_chunk':
+                config['audio_chunk'] = int(field[1])
             elif field[0] == 'audio_channels':
-                self.audio_channels = int(field[1])
+                config['audio_channels'] = int(field[1])
             elif field[0] == 'audio_rate':
-                self.audio_rate = int(field[1])
+                config['audio_rate'] = int(field[1])
             elif field[0] == 'recording_time':
-                self.recording_time = int(field[1])
+                config['recording_time'] = int(field[1])
             elif field[0] == 'client_id':
-                self.client_id = field[1].replace('"', '')
+                config['client_id'] = field[1].replace('"', '')
+                has_id = True
             elif field[0] == 'api_key':
-                self.api_key = field[1].replace('"', '')
+                config['api_key'] = field[1].replace('"', '')
+                has_key = True
+            elif field[0] == 'speaker':
+                speaker = field[1].replace('"', '')
+                speaker = speaker.split(' ')
+                config['speaker'] = speaker[1].strip('()')
 
 except Exception:
     print("Error reading mama.conf file")
+
+print(config)
 
 if has_id and has_key:
     # launch the recognition
