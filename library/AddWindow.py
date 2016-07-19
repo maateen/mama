@@ -10,7 +10,7 @@ from HelpWindow import HelpWindow
 from SetupWindow import SetupWindow
 from ExternalWindow import ExternalWindow
 from InternalWindow import InternalWindow
-from time import localtime, strftime
+from MessageDialogWindow import MessageDialogWindow
 import os
 import subprocess
 import xml.etree.ElementTree as ET
@@ -589,18 +589,22 @@ class AddWindow():
                 output = output.decode("utf-8")
                 error = error.decode("utf-8")
                 self.show_label('show')
-                if output or error:
-                    message_time = strftime("%a, %d %b %Y %H:%M:%S",
-                                            localtime())
-                    main_message = 'Time: ' + message_time + \
-                                   '\n\nOutput:\n\n' + output + \
-                                   '\n\nError:\n\n' + error + '\n\n'
-                    message_file = '/tmp/mama-error-' + strftime(
-                        "%a-%d-%b-%Y-%H-%M-%S", localtime())
-                    with open(message_file, 'w') as f:
-                        f.write(main_message)
-                self.labelState.set_text(
-                    'Output and error have been saved to ' + message_file)
+                self.labelState.set_text('Output and error on dialog box.')
+                if output and error:
+                    info_dialog = MessageDialogWindow(output)
+                    info_dialog.show_info_message()
+                    info_dialog.show_all()
+                    error_dialog = MessageDialogWindow(error)
+                    error_dialog.show_error_message()
+                    error_dialog.show_all()
+                elif output and not error:
+                    info_dialog = MessageDialogWindow(output)
+                    info_dialog.show_info_message()
+                    info_dialog.show_all()
+                else:
+                    error_dialog = MessageDialogWindow(error)
+                    error_dialog.show_error_message()
+                    error_dialog.show_all()
 
     def help_clicked(self, button):
         """
@@ -648,10 +652,11 @@ class AddWindow():
                 spacebyplus = entry.find('spacebyplus').text
                 store.append([Key, Command, Type, linker, spacebyplus])
         except Exception as e:
-            print("Error while reading config file")
-            print(type(e))
-            print(e.args)
-            print(e)
+            error = "Error while reading config file.\n"+type(
+                e)+"\n"+e.args+"\n"+e
+            error_dialog = MessageDialogWindow(error)
+            error_dialog.show_error_message()
+            error_dialog.show_all()
 
     def saveTree(self, store):
         """
@@ -695,4 +700,6 @@ class AddWindow():
             self.show_label('show')
             self.labelState.set_text('Save commands')
         except IOError:
-            print("Unable to write the file")
+            error_dialog = MessageDialogWindow("Unable to write the file.")
+            error_dialog.show_error_message()
+            error_dialog.show_all()
