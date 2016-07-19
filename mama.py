@@ -7,6 +7,7 @@ from os.path import expanduser
 
 sys.path.append(dirname(abspath(__file__)) + '/library')
 from Interface import Interface
+from MessageDialogWindow import MessageDialogWindow
 
 # Declaring some variables, config{} dict will contain all config info
 config = {}
@@ -46,9 +47,10 @@ try:
                 config['speaker'] = speaker[1].strip('()')
 
 except Exception:
-    print("Error reading mama.conf file")
-
-print(config)
+    # Show error message with dialog
+    error_dialog = MessageDialogWindow("Error reading mama.conf file")
+    error_dialog.show_error_message()
+    error_dialog.show_all()
 
 if has_id and has_key:
     # launch the recognition
