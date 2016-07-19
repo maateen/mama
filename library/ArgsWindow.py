@@ -29,16 +29,16 @@ class ArgsWindow():
         self.grid.set_column_spacing(2)
         self.grid.set_column_homogeneous(False)
 
-        label1 = Gtk.Label(_('key sentence'))
+        label1 = Gtk.Label('key sentence')
         label1.set_justify(Gtk.Justification.LEFT)
         label1.set_halign(Gtk.Align.START)
         label1.set_hexpand(True)
 
-        label2 = Gtk.Label(_("Linking word"))
+        label2 = Gtk.Label("Linking word")
         label2.set_justify(Gtk.Justification.LEFT)
         label2.set_halign(Gtk.Align.START)
 
-        label3 = Gtk.Label(_("Replace space by plus"))
+        label3 = Gtk.Label("Replace space by plus")
         label3.set_justify(Gtk.Justification.LEFT)
         label3.set_halign(Gtk.Align.START)
 
@@ -46,17 +46,17 @@ class ArgsWindow():
         ll.set_vexpand(True)
 
         self.entry1 = Gtk.Entry()
-        self.entry1.set_tooltip_text(_('key sentence'))
+        self.entry1.set_tooltip_text('key sentence')
 
         self.entry2 = Gtk.Entry()
-        self.entry2.set_tooltip_text(_("Word to separate call and parameter"))
+        self.entry2.set_tooltip_text("Word to separate call and parameter")
         self.checkbutton = Gtk.Switch()
-        self.checkbutton.set_tooltip_text(_("Replace space by plus"))
+        self.checkbutton.set_tooltip_text("Replace space by plus")
         self.checkbutton.set_active(False)
 
         button = Gtk.Button()
-        button.set_label(_("Go"))
-        button.set_tooltip_text(_("Go"))
+        button.set_label("Go")
+        button.set_tooltip_text("Go")
         image = Gtk.Image()
         image.set_from_stock(Gtk.STOCK_APPLY, Gtk.IconSize.BUTTON)
         button.set_image(image)
