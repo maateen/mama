@@ -8,6 +8,7 @@ from os.path import expanduser
 import xmltodict
 from Listener import Listener
 from StringParser import StringParser
+from MessageDialogWindow import MessageDialogWindow
 
 
 class Interface():
@@ -52,8 +53,6 @@ class Interface():
 
             config_file = default
 
-        print("config file:", config_file)
-
         host = "https://speech.platform.bing.com"
 
         params = urllib.parse.urlencode(
@@ -71,7 +70,6 @@ class Interface():
         conn = http.client.HTTPSConnection(access_token_host, timeout=10)
         conn.request("POST", token_path, params, headers)
         response = conn.getresponse()
-        print(response.status)
 
         if response.status == 200:
 
@@ -102,7 +100,6 @@ class Interface():
                          "/recognize/query?scenarios=ulm&appid=D4D52672-91D7-4C74-8AD8-42B1D98141A5&locale=en-US&device.os=wp7&version=3.0&format=xml&requestid=1d4b6030-9099-11e0-91e4-0800200c9a66&instanceid=1d4b6030-9099-11e0-91e4-0800200c9a66",
                          body, headers)
             response = conn.getresponse()
-            print(response.status)
 
             if response.status == 200:
 
@@ -114,7 +111,6 @@ class Interface():
                     text = result['speechbox-root']['results']['result']['name']
                 except:
                     text = ''
-                print(text)
                 os.system("echo '" + text + "' > /tmp/mama/mama_result_" +
                           str(self.PID))
 
@@ -123,12 +119,16 @@ class Interface():
                              config_file, self.PID)
 
             else:
-                print(response.reason)
                 os.system(
                     'echo "' + response.reason + '" > /tmp/mama/mama_error_' + self.PID)
+                error_dialog = MessageDialogWindow(response.reason)
+                error_dialog.show_error_message()
+                error_dialog.show_all()
                 sys.exit(1)
         else:
-            print(response.reason)
             os.system(
                 'echo "' + response.reason + '" > /tmp/mama/mama_error_' + self.PID)
+            error_dialog = MessageDialogWindow(response.reason)
+            error_dialog.show_error_message()
+            error_dialog.show_all()
             sys.exit(1)
