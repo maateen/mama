@@ -1,11 +1,8 @@
 [Desktop Entry]
-Type=Application
-Encoding=UTF-8
 Name=Mama
-GenericName=Mama
-Comment=Voice driven PC Controller
-Icon=/usr/share/mama/resources/icons.png
+Comment=Voice driven Linux OS controller
 Exec=python3 /usr/share/mama/mama.py
+Icon=/usr/share/mama/resources/icons.png
 Terminal=false
-StartupNotify=false
-Categories=Application
+Type=Application
+Categories=Utility;Application;
