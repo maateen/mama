@@ -4,7 +4,7 @@ from gi.repository import Gtk
 import os
 
 # manage the development of the module selection window
-class moduleSelection():
+class ModuleSelection():
     """
     @description: This class display an fileChooserDialog when the user
     wants to add a new module from the menu of the main window
