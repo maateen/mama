@@ -27,7 +27,6 @@ class WorkWithModule():
                     'library')
                 module_dir = os.path.join(parent_dir, 'modules')
                 execute = 'python3 ' + module_dir + '/' + module_name + ' ' + param
-                print(execute)
                 os.system(execute)
             else:
                 message = "you didn't say the linking word"
