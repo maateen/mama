@@ -36,7 +36,6 @@ class TextToSpeech():
         conn = http.client.HTTPSConnection(access_token_host, timeout=10)
         conn.request("POST", token_path, params, headers)
         response = conn.getresponse()
-        print(response.status)
 
         if response.status == 200:
             data = response.read()
@@ -67,10 +66,13 @@ class TextToSpeech():
 
             data = response.read()
             conn.close()
-            print("The synthesized wave length: %d" % (len(data)))
             wf = open('/tmp/mama/tts.wav', 'wb')
             wf.write(data)
             wf.close()
             os.system('play /tmp/mama/tts.wav')
             os.system('touch /tmp/mama/mama_stop_' + pid)
+            sys.exit(1)
+        else:
+            os.system(
+                'echo "' + response.reason + '" > /tmp/mama/mama_error_' + pid)
             sys.exit(1)
