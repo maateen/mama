@@ -26,7 +26,7 @@ class Interface():
             'python3 ' + self.p + 'notifier.py ' + self.PID + ' &')
 
         # We launch the recorder
-        Listener(self.p, self.PID)
+        Listener(config, self.PID)
         self.sendto(config)
 
     def sendto(self, config):
@@ -41,13 +41,13 @@ class Interface():
         if os.path.exists(config_file):
             config_file = config_file
         else:
-            if os.path.exists(expanduser('~') + '/.config/mama') == False:
+            if not os.path.exists(expanduser('~') + '/.config/mama'):
                 os.makedirs(expanduser('~') + '/.config/mama')
-            if os.path.exists(
-                            expanduser('~') + '/.config/mama/modules') == False:
+            if not os.path.exists(
+                            expanduser('~') + '/.config/mama/modules'):
                 os.system('cp -r ' + self.p + '/modules ' + expanduser(
                     '~') + '/.config/mama')
-            if os.path.exists(default) == False:
+            if not os.path.exists(default):
                 default = self.p + 'config/en_EN/default.xml'
 
             config_file = default
@@ -90,7 +90,9 @@ class Interface():
             finally:
                 f.close()
 
-            headers = {"Content-type": "audio/wav; samplerate=8000",
+            headers = {"Content-type": "audio/wav; samplerate=" + str(config[
+                                                                          'audio_rate']) + "; sourcerate=" + str(
+                config['audio_rate']),
                        "Authorization": "Bearer " + access_token}
 
             # Connect to server to recognize the wave binary
