@@ -41,9 +41,6 @@ class StringParser():
                     linker = the_linker
                     spacebyplus = space_by_plus
 
-            print("key", tp)
-            print("command", do)
-
             os.system('echo "' + do + '" > /tmp/mama/mama_cmd_' + self.pid)
             if 'modules' in tp:
                 # if we find the word "modules", a WorkWithModule class and we pass it we instantiate
