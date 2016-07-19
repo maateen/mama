@@ -8,7 +8,7 @@ from gi.repository import Notify
 
 RESULT = False
 path = os.path.dirname(os.path.abspath(__file__))
-path += 'resources'
+path += '/resources'
 
 if len(sys.argv) >= 2:
     PID = sys.argv[1]
