@@ -16,10 +16,17 @@ class HelpWindow():
         documenters = ["Maksudur Rahman Maateen <http://maateen.me/>"]
 
         # we fill in the aboutdialog
-        self.aboutdialog.set_program_name(_("About Mama"))
-        self.aboutdialog.set_version("Alpha Version")
+        self.aboutdialog.set_program_name("About Mama")
+        self.aboutdialog.set_version("Version 0.1")
         self.aboutdialog.set_copyright("Maksudur Rahman Maateen \xa9 2016")
-        self.aboutdialog.set_comments("The aim of this project is to let you use Microsoft powered Bing Speech Recognition API to control your Linux computer. The project is developed in Python3. For note, this is a fork of project google2ubuntu.")
+        self.aboutdialog.set_comments("The aim of this project is to let you "
+                                      "use Microsoft powered Bing Speech "
+                                      "Recognition API to control your Linux "
+                                      "computer. The project is developed in "
+                                      "Python3. For note, this is a fork of "
+                                      "project google2ubuntu - <"
+                                      "https://github.com/benoitfragit/google2ubuntu/>."
+                                      " Thanks Franquet Benoit for your google2ubuntu.")
         self.aboutdialog.set_license_type (Gtk.License.GPL_3_0,)
         self.aboutdialog.set_website("https://maateen.github.io/mama/")
         self.aboutdialog.set_website_label("https://maateen.github.io/mama/")
