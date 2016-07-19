@@ -273,8 +273,6 @@ class AddWindow():
         add_button = Gtk.MenuToolButton(icon_widget = add_icon)
         add_button.set_label("Add")
         add_button.set_menu(menu)
-        image = Gtk.Image()
-        image.set_from_stock(Gtk.STOCK_ADD, Gtk.IconSize.BUTTON)
         # label is shown
         add_button.set_is_important(True)
         # insert the button at position in the toolbar
