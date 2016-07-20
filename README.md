@@ -13,7 +13,7 @@ The project consists in 2 principal Python3 scripts:
 * mama.py
 * mama-manager.py
 
-The first one lets you send commands to Microsoft and then execute some actions. The second one lets you manage all the commands with a nice GUI, powered by `PyGtk`.
+The first one lets you send commands to Microsoft and then execute some actions. The second one lets you manage all the commands with a nice GUI, powered by `PyGtk3`.
 
 #Installation
 ### Dependencies
@@ -27,41 +27,56 @@ For the moment, dependencies are:
 * libnotify-dev
 * xdotool
 * acpi
+* gksu
+* unzip
 
-If you are installing Mama from source not from deb or from ppa, type this:
+If you are using Ubuntu/Debian, type this to install all dependencies:
 ```
-sudo apt-get install python3 python3-gi python3-xmltodict python3-pyaudio libnotify-dev acpi xdotool
+sudo apt-get install python3 python3-gi python3-xmltodict python3-pyaudio libnotify-dev acpi xdotool gksu unzip
 ```
+Now we will install the main things.
+```
+wget "https://github.com/maateen/mama/releases/download/v0.1/mama-v0.1.zip"
 
-##First launch
+unzip mama-v0.1.zip
+cd mama
+sudo python3 install.py
+```
+That's all. Now you should get the success message.
+####Note: Mama should run like a king on every Linux distribution. Just install the above dependencies with relevant command.
+
+##Configuration
 ###Main programs
 Once you have installed Mama, you can attribute a shortcut to those two of Python scripts:
 
 ```
-python3 /usr/share/Mama/mama.py
-python3 /usr/share/Mama/mama-manager.py
+python3 /usr/share/mama/mama.py
+python3 /usr/share/mama/mama-manager.py
 ```
 
 Moreover, if you search in the application's menu you will find two launchers, one for each of those programs.
 
 After that, you can launch `mama-manager.py` in order to manage all commands.
-![Mama-manager](http://pix.toile-libre.org/upload/original/1392223354.png)
+![Mama-manager](https://s20.postimg.org/pkpcfboml/Screenshot_from_2016_07_20_21_32_22.png)
 
 
 As you can see, Mama comes with several default commands. I will explain you how to manage and add commands.
 
 ###Basic configs
 Then you can configure Mama by clicking on the **Setup** button, that will open a window
-![setup](http://pix.toile-libre.org/upload/original/1392400825.png)
+![setup](https://s20.postimg.org/hqoqtxgtp/Screenshot_from_2016_07_20_21_37_12.png)
 
 In this window you can:
 
-1. configure the language you want to use, by changing the language in the combobox. For the GUI the will take effect after restart.
-2. Set the recording time (seconds) between 1 and 10 seconds
-3. Set the command to pause/play the media player, (If you don't know what command to use let it emply)
-4. Activate/Deactivate and configure the hotword mode
+1. Set you locale, the language in which the speaker will talk.
+2. Set audio chunk
+3. Set number of channels
+4. Set sampling sate
+5. Set recording time
+6. Set Microsoft Azure Client ID, please visit: [https://portal.azure.com/](https://portal.azure.com/) for your client ID. It is required.
+7. Set Microsoft Bing Speech API Key, please visit [https://www.microsoft.com/cognitive-services/en-us/speech-api](https://www.microsoft.com/cognitive-services/en-us/speech-api) for our API key. It is required.
 
-For the last two parameters, as there is a lot of media player (vlc, mplayer, banshee, ...) I think this way is the most efficient because it lets anybody writing a basic shell script that will pause or play his favorite media player. So those commands could be shell commands or could be more elaborated scripts
+For the last two parameters, please visit our wiki for details.
 
 #Manage commands
 
@@ -175,20 +190,3 @@ Perhaps, you will have to modify the linker field of those module by selecting t
 Once you have personalized and take care about the commands already included in Mama, you can launch the recognition by launching `mama.py`
 
 A little sound is played and a notification tell you to speak. Then the notification show the result and the action associated to the text you have pronounced is played.
-
-#How-to contribute
-##Design some modules
-If you want you can write a module that will be integrated in the Github page, the user will have to download it and will be able to use it
-
-## Share ideas
-You can share ideas and contact me on the google+ comunauty:
-[Mama](https://plus.google.com/u/0/communities/103854623082229435165)
-
-## Demonstration
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=vkuX4tqaLFU
-" target="_blank"><img src="http://img.youtube.com/vi/vkuX4tqaLFU/0.jpg"
-alt="Mama" width="480" height="360" border="5" /></a>
-
-## Documentation page
-I've wrote a documentation page with Sphinx
-[Documentation](http://benoitfragit.github.io/Mama/)
