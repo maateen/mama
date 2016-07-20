@@ -19,7 +19,7 @@ class MessageDialogWindow(Gtk.Window):
         Gtk.Window.__init__(self)
         self.text = text
 
-    def show_info_message(self, widget):
+    def show_info_message(self):
         dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO,
                                    Gtk.ButtonsType.OK,
                                    "Info")
