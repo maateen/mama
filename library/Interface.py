@@ -114,6 +114,9 @@ class Interface():
                 os.system("echo '" + text + "' > /tmp/mama/mama_result_" +
                           str(self.PID))
 
+                # Calling updater
+                os.system(
+                    'python3 ' + self.p + 'updater.py ' + self.PID + ' &')
                 # parsing the results to find the action
                 StringParser(config, text,
                              config_file, self.PID)
