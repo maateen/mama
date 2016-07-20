@@ -8,6 +8,7 @@ from os.path import expanduser
 import xmltodict
 from Listener import Listener
 from StringParser import StringParser
+from MessageDialogWindow import MessageDialogWindow
 
 
 class Interface():
@@ -124,4 +125,7 @@ class Interface():
         else:
             os.system(
                 'echo "' + response.reason + '" > /tmp/mama/mama_error_' + self.PID)
+            error_dialog = MessageDialogWindow(response.reason)
+            error_dialog.show_error_message()
+            error_dialog.show_all()
             sys.exit(1)
