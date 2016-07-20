@@ -55,6 +55,8 @@ os.system(
     "gksu \"cp -v " + parent_dir + "/mama-manager.py" + " " + target_dir + "\"")
 os.system(
     "gksu \"cp -v " + parent_dir + "/notifier.py" + " " + target_dir + "\"")
+os.system(
+    "gksu \"cp -v " + parent_dir + "/updater.py" + " " + target_dir + "\"")
 
 # Now copying desktop launcher
 print('Now making desktop launcher.')
