@@ -57,14 +57,14 @@ python3 /usr/share/mama/mama-manager.py
 Moreover, if you search in the application's menu you will find two launchers, one for each of those programs.
 
 After that, you can launch `mama-manager.py` in order to manage all commands.
-![Mama-manager](https://s20.postimg.org/pkpcfboml/Screenshot_from_2016_07_20_21_32_22.png)
+![Mama-manager](https://raw.githubusercontent.com/maateen/mama/gh-pages/Screenshot_from_2016_07_20_21_32_22.png)
 
 
 As you can see, Mama comes with several default commands. I will explain you how to manage and add commands.
 
 ###Basic configs
 Then you can configure Mama by clicking on the **Setup** button, that will open a window
-![setup](https://s20.postimg.org/hqoqtxgtp/Screenshot_from_2016_07_20_21_37_12.png)
+![setup](https://raw.githubusercontent.com/maateen/mama/gh-pages/Screenshot_from_2016_07_20_21_37_12.png)
 
 In this window you can:
 
